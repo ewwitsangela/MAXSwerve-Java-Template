@@ -65,6 +65,8 @@ public final class Constants {
     public static final boolean kGyroReversed = false;
   }
 
+  //
+
   public static final class ModuleConstants {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T, 13T, or 14T.
     // This changes the drive speed of the module (a pinion gear with more teeth will result in a
@@ -119,6 +121,7 @@ public final class Constants {
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final double kDriveDeadband = 0.05;
+    public static final double kIntakeDeadband = 1;
   }
 
   public static final class AutoConstants {
@@ -139,4 +142,10 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
   }
+  public static final class BagMotorConstants {
+    //VictorSPX PWM IDs
+    public static final int kLeftIntakeId = 0;
+    public static final int kRightIntakeId = 1;
+  }
+
 }
