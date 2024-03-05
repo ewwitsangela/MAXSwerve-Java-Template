@@ -6,28 +6,38 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CimMotorConstants;
+import frc.robot.Constants.BagMotorConstants;
 
-public class intakeSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
 
   public WPI_VictorSPX m_intakeLeft, m_intakeRight;
 
   /** Creates a new intake. */
-  public intakeSubsystem() {
+  public IntakeSubsystem() {
     //motors
-    m_intakeLeft = new WPI_VictorSPX(CimMotorConstants.kLeftIntakeId);
-    m_intakeRight = new WPI_VictorSPX(CimMotorConstants.kRightIntakeId);
+    m_intakeLeft = new WPI_VictorSPX(BagMotorConstants.kLeftIntakeId);
+    m_intakeRight = new WPI_VictorSPX(BagMotorConstants.kRightIntakeId);
   }
 
   // public void move(double speed){
   //   m_left.set(ControlMode.PercentOutput, speed);
   // }
 
-  public void controllerIntake(XboxController controller) {
-    m_intakeLeft.set(controller.getRightTriggerAxis()); //this axis is bound to the range of [0, 1] as opposed to the usual [-1, 1].
-    m_intakeRight.set(controller.getRightTriggerAxis());
+  // public void laaintake(XboxController controller) {
+  //   m_intakeLeft.set(controller.getRightTriggerAxis()); 
+  //   //m_intakeRight.set(controller.getRightTriggerAxis());
+  //   m_intakeRight.follow(m_intakeLeft);
+  // }
+
+  public void intake(double speed, double deadband) {
+    m_intakeLeft.set(speed*deadband);
+    m_intakeRight.follow(m_intakeLeft);
+  }
+  
+  public void stop() {
+    m_intakeLeft.stopMotor();
+    m_intakeRight.stopMotor();
   }
   
   @Override
